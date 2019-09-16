@@ -1,0 +1,59 @@
+{% block html %}
+{% load static %}
+<!doctype html>
+<html>
+    <head>
+        {% block meta %}
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% endblock %}
+        {% block css %}
+            <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+            <!--[if lte IE 8]>
+                <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-old-ie-min.css">
+            <![endif]-->
+            <!--[if gt IE 8]><!-->
+                <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css">
+            <!--<![endif]-->
+            <!--[if lte IE 8]>
+                <link rel="stylesheet" href="{% static "css/layouts/outs-old-ie.css" %}">
+            <![endif]-->
+            <!--[if gt IE 8]><!-->
+                <link rel="stylesheet" href="{% static "css/layouts/pricing.css" %}">
+            <!--<![endif]-->
+        {% endblock %}
+        <title>{% block title %}Aquarium project{% endblock %}</title>
+    </head>
+    <body>
+        {% block header %}
+            <div class="pure-menu pure-menu-horizontal">
+                <a href="{% url 'index' %}" class="pure-menu-heading">Aquarium project</a>
+                <ul class="pure-menu-list">
+                   {% block menu %}
+
+                   {% endblock %}
+                </ul>
+            </div>
+        {% endblock %}
+        {% block content %}
+            {% block banner %}
+                <div class="banner">
+                    <h1 class="banner-head"></h1>
+                </div>
+            {% endblock %}
+            {% block body_content %}
+
+            {% endblock %}
+        {% endblock %}
+       {% block footer %}
+            <div class="footer l-box">
+                <p>
+                    Proudly powered by glorious capybaras. And crabs. 🦀 <br/>
+                    Remember: mess with crabo - you gonna get stabo.
+                </p>
+            </div>
+        {% endblock %}
+    </body>
+</html>
+{% endblock %}

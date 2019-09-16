@@ -1,0 +1,16 @@
+{% extends "base/base_index.html" %}
+{% block menu %}
+    <li class="pure-menu-item"><a href="{% url 'index' %}" class="pure-menu-link pure-menu-selected">Home</a></li>
+    <li class="pure-menu-item "><a href="{% url 'about' %}" class="pure-menu-link">About</a></li>
+    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
+    {% if logged_in %}
+        <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>
+    {% else %}
+        <li class="pure-menu-item"><a href="{% url 'login' %}" class="pure-menu-link">Log in</a></li>
+    {% endif %}
+{% endblock %}
+{% block banner %}
+{% endblock %}
+{% block body_content %}
+    <h1>Welcome!</h1>
+{% endblock %}
