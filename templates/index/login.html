@@ -17,6 +17,7 @@
             <h2>Log in</h2>
             {{ form_msg }}
             <form class="pure-form pure-form-stacked" method="POST" action="{% url 'login' %}">
+                <fieldset>
                     {% csrf_token %}
                     {{ login_form }}
                     <button type="submit" class="pure-button pure-button-primary">Log in</button>

@@ -1,0 +1,35 @@
+{% extends 'base/base_index.html' %}
+{% block menu %}
+    <li class="pure-menu-item"><a href="{% url 'index' %}" class="pure-menu-link pure-menu-selected">Home</a></li>
+    <li class="pure-menu-item "><a href="{% url 'about' %}" class="pure-menu-link">About</a></li>
+    <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
+    {% if logged_in %}
+        <li class="pure-menu-item"><a href="{% url 'logout' %}" class="pure-menu-link">Log out</a></li>
+        <li class="pure-menu-item"><a href="{% url 'user_page' %}" class="pure-menu-link">User Page</a></li>
+    {% else %}
+        <li class="pure-menu-item"><a href="{% url 'login' %}" class="pure-menu-link">Log in</a></li>
+    {% endif %}
+{% endblock %}
+{% block banner %}
+{% endblock %}
+{% block body_content %}
+    <div class="pure-g">
+        <div class="pure-u-1-5">
+
+        </div>
+        <div class="pure-u-3-5">
+            <h2>Add new habitat</h2>
+            <p>{{ msg }}</p>
+            <div>
+                <form class="pure-form pure-form-stacked" method="POST" action="{% url 'add_new_habitat' %}">
+                    {% csrf_token %}
+                    {{ add_habitat_form }}
+                    <button type="submit" class="pure-button pure-button-primary">Add new habitat</button>
+                </form>
+            </div>
+        </div>
+        <div class="pure-u-1-5">
+
+        </div>
+    </div>
+{% endblock %}
