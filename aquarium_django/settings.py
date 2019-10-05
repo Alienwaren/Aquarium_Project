@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ["192.168.0.105", "89.66.54.252", "127.0.0.1"]
 
 INSTALLED_APPS = [
     'monitor.apps.MonitorConfig',
-    'monitor_api.apps.MonitorApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -11,6 +11,7 @@ import bcrypt
 from monitor.models import User, Pet, Habitat, ApiKey
 from aquarium_django.helpers import api_key
 
+
 def index(request) -> HttpResponse:
     template_parser = TextTemplate(MarkdownTextEvaluator)
     templates = template_parser.templates_from_files([Path("static/markdown/index/get_started.md"),
@@ -136,7 +137,7 @@ def add_new_habitat(request):
 
 @login_required
 def habitat_page(request, params: Dict):
-    msg = "Manage or look at your pet"
+    msg = f"{params['pet']}'s Habitat"
     return render(request, "user/habitat_page.html", {"msg": msg,
                                                       "logged_in": request.session['logged_in'], "pet": params['pet']})
 
@@ -148,11 +149,13 @@ def manage_habitat(request, params: Dict):
     habitat = Habitat.objects.filter(inhabitant=pet).first()
     habitat_key = ApiKey.objects.filter(habitat_owner=habitat).first()
     if habitat_key is None:
-        key = api_key.generate(17) # dont ask my why 17
+        key = api_key.generate(17)  # dont ask my why 17
         api_key_object = ApiKey()
         api_key_object.api_key = key
         api_key_object.habitat_owner = habitat
         api_key_object.save()
-    msg = "Manage your pet"
+    msg = f"Manage {params['pet']}'s habitat"
     return render(request, "user/manage_habitat.html", {"msg": msg,
-                                                      "logged_in": request.session['logged_in'], "api_key": habitat_key.api_key })
+                                                      "logged_in": request.session['logged_in'], "api_key": habitat_key.api_key})
+
+

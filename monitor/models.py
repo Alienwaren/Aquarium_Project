@@ -19,23 +19,23 @@ class Pet(models.Model):
 
 class Habitat(models.Model):
     inhabitant = models.ForeignKey(Pet, on_delete=models.CASCADE)
-    actual_temperature = models.IntegerField()
-    actual_insolation = models.IntegerField()
+    actual_temperature = models.FloatField()
+    actual_insolation = models.FloatField()
     habitat_type = models.CharField(max_length=150, default="")
 
 
 class TemperatureLog(models.Model):
     source_habitat = models.ForeignKey(Habitat, on_delete=models.CASCADE)
-    value = models.IntegerField()
+    value = models.FloatField()
 
 
 class InsolationLog(models.Model):
     source_habitat = models.ForeignKey(Habitat, on_delete=models.CASCADE)
-    value = models.IntegerField()
+    value = models.FloatField()
 
 
 class ApiKey(models.Model):
-    api_key = models.CharField(max_length=100, default="")
+    api_key = models.CharField(max_length=100, default="", unique=True)
     habitat_owner = models.ForeignKey(Habitat, on_delete=models.CASCADE)
 
 
