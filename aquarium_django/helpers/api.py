@@ -14,3 +14,4 @@ def write_data_and_log(value: float, target_habitat: Habitat, topic: str) -> Non
         target_habitat.actual_insolation = value
 
     target_habitat.save()
+

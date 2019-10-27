@@ -81,7 +81,7 @@ def user_page(request) -> HttpResponse:
     return render(request, "user/user_page.html", {
         "logged_in": request.session['logged_in'],
         "username": request.session['username'],
-        "habitats": owned_habitats
+        "habitats": owned_habitats,
     })
 
 
@@ -137,9 +137,18 @@ def add_new_habitat(request):
 
 @login_required
 def habitat_page(request, params: Dict):
+    user = User.objects.filter(username=request.session['username']).first()
+    pet = Pet.objects.filter(owner=user, pet_name=params['pet']).first()
+    habitat = Habitat.objects.filter(inhabitant=pet).first()
+    habitat_api_key = ApiKey.objects.filter(habitat_owner=habitat).first()
+    actual_temperature = habitat.actual_temperature
+    actual_insolation = habitat.actual_insolation
     msg = f"{params['pet']}'s Habitat"
     return render(request, "user/habitat_page.html", {"msg": msg,
-                                                      "logged_in": request.session['logged_in'], "pet": params['pet']})
+                                                      "logged_in": request.session['logged_in'], "pet": params['pet'],
+                                                      "temperature": actual_temperature,
+                                                      "insolation": actual_insolation,
+                                                      "api_key": habitat_api_key.api_key})
 
 
 @login_required
@@ -156,6 +165,5 @@ def manage_habitat(request, params: Dict):
         api_key_object.save()
     msg = f"Manage {params['pet']}'s habitat"
     return render(request, "user/manage_habitat.html", {"msg": msg,
-                                                      "logged_in": request.session['logged_in'], "api_key": habitat_key.api_key})
-
-
+                                                        "logged_in": request.session['logged_in'],
+                                                        "api_key": habitat_key.api_key})

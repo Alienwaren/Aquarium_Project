@@ -1,4 +1,4 @@
-from typing import Dict, Any
+from typing import Dict, Any, Union
 
 STATUS_CODES = {
     0: "OK",
@@ -9,7 +9,7 @@ STATUS_CODES = {
 }
 
 
-def generate_json_response(code: int, msg: str, contents: str = "") -> Dict[Any, Any]:
+def generate_json_response(code: int, msg: str, contents: Union[Dict, str] = "") -> Dict[Any, Any]:
     """
     Method generates base json response
     :param contents: Detailed message
